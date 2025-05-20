@@ -1,18 +1,18 @@
 # Medical Report Visualization API
 
-A FastAPI backend service for extracting text from medical reports using OCR and parsing them into structured data.
+A FastAPI backend service for extracting text from medical reports using the Gemini API and parsing them into structured data.
 
 ## Features
 
 - Extract text from various file formats (PDF, JPG, PNG, TIFF)
 - Convert PDF documents to images if they're not text-based
 - Parse medical reports to extract patient information and test results
-- RESTful API with OpenAPI documentation
 
 ## Requirements
 
 - Python 3.8+
-- Tesseract OCR installed on your system
+- Tesseract OCR is installed on your system
+- Gemini API key
 
 ## Installation
 
@@ -38,6 +38,9 @@ A FastAPI backend service for extracting text from medical reports using OCR and
 
 ```bash
 uvicorn app.main:app --reload
+```
+```bash
+python main.py
 ```
 
 The API will be available at http://localhost:8000
@@ -85,16 +88,3 @@ Extract information from a medical report file.
 }
 ```
 
-## Testing
-
-Run the tests with:
-
-```bash
-pytest
-```
-
-For test coverage:
-
-```bash
-pytest --cov=app
-```
