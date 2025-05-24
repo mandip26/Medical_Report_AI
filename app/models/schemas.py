@@ -17,3 +17,7 @@ class ReportItem(BaseModel):
 class ExtractionResult(BaseModel):
     patient_info: PatientInfo
     report_items: List[ReportItem]
+
+class UserData(BaseModel):
+    user_id: str
+    

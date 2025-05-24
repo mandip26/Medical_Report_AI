@@ -1,18 +1,21 @@
 # Medical Report Visualization API
 
-A FastAPI backend service for extracting text from medical reports using the Gemini API and parsing them into structured data.
+A FastAPI backend service for extracting text from medical reports using the Gemini API and parsing them into structured data with MongoDB storage.
 
 ## Features
 
 - Extract text from various file formats (PDF, JPG, PNG, TIFF)
-- Convert PDF documents to images if they're not text-based
+- Convert PDF documents to images for processing
 - Parse medical reports to extract patient information and test results
+- Store extraction results in MongoDB with user association
+- Retrieve and manage user-specific extraction data
+- Health check endpoints for API monitoring
 
 ## Requirements
 
 - Python 3.8+
-- Tesseract OCR is installed on your system
 - Gemini API key
+- MongoDB database
 
 ## Installation
 
@@ -26,52 +29,65 @@ A FastAPI backend service for extracting text from medical reports using the Gem
    ```bash
    pip install -r requirements.txt
    ```
-4. Set up Tesseract OCR:
-
-   - Windows: Download and install from https://github.com/UB-Mannheim/tesseract/wiki
-   - Linux: `sudo apt install tesseract-ocr`
-   - Mac: `brew install tesseract`
-
-5. Adjust the Tesseract path in `app/core/config.py` if needed.
+4. Set up environment variables:
+   Create a `.env` file in the root directory with:
+   ```
+   GEMINI_API_KEY=your_gemini_api_key_here
+   MONGODB_URL=your_mongodb_connection_string_here
+   ```
 
 ## Running the Application
 
 ```bash
-uvicorn app.main:app --reload
+uvicorn main:app --host 0.0.0.0 --port 5000 --reload false
 ```
 ```bash
-python main.py
+python app/main.py
 ```
 
-The API will be available at http://localhost:8000
+The API will be available at http://localhost:5000
 
 API Documentation is available at:
 
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
+- Swagger UI: http://localhost:5000/docs
+- ReDoc: http://localhost:5000/redoc
 
 ## API Endpoints
 
-### POST /api/v1/extract
+### Health & Data Management
 
+#### GET /api/v1/health
+Health check endpoint for API monitoring.
+
+#### GET /api/v1/user/{user_id}
+Retrieve all extraction results for a specific user.
+
+#### DELETE /api/v1/user/{user_id}
+Delete all extraction results for a specific user.
+
+#### DELETE /api/v1/record/{document_id}
+Delete a specific extraction result by document ID.
+
+### Data Extraction
+
+#### POST /api/v1/extract
 Extract information from a medical report file.
 
-**Request:**
-
-- Multipart form with file upload
+**Parameters:**
+- `user_id` (optional): User identifier for storing results
+- `file`: Medical report file (PDF, JPG, PNG, TIFF)
 
 **Response:**
-
 ```json
 {
-  "patient_info": {
+  "patient": {
     "name": "John Doe",
     "age": "45 Yrs",
     "gender": "M",
     "referred_by": "Dr. Smith",
     "date": "2025-05-21"
   },
-  "report_items": [
+  "reports": [
     {
       "title": "Hemoglobin",
       "result": "14.5",
@@ -88,3 +104,22 @@ Extract information from a medical report file.
 }
 ```
 
+## Project Structure
+
+```
+app/
+├── api/
+│   ├── endpoints.py          # Main extraction endpoints
+│   └── health.py            # Health check and data management
+├── core/
+│   └── config.py            # Application configuration
+├── database/
+│   └── data.py              # MongoDB operations
+├── models/
+│   └── schemas.py           # Pydantic data models
+├── services/
+│   └── gemini_service.py    # Gemini API integration
+├── utils/
+│   └── file_utils.py        # File handling utilities
+└── main.py                  # FastAPI application entry point
+```
