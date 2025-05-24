@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     
     # CORS settings - parse from comma-separated string in .env
     ALLOWED_ORIGINS_STR: str = ""
-    ALLOWED_ORIGINS: List[str] = ["http://localhost", "http://localhost:3000", "http://localhost:8001"]
+    ALLOWED_ORIGINS: List[str] = ["http://localhost", "http://localhost:5173", "http://localhost:8001"]
 
     @field_validator("ALLOWED_ORIGINS", mode="before")
     @classmethod
