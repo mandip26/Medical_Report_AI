@@ -73,8 +73,9 @@ async def extract(
         
         # Store in database if user_id is provided
         if user_id:
-            save_extraction_result(user_id, consolidated_response)
-        
+            record_id = save_extraction_result(user_id, consolidated_response)
+            consolidated_response["_id"] = str(record_id)
+            
         return consolidated_response
     finally:
         remove_file(file_path)
