@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     
     # CORS settings - parse from comma-separated string in .env
     ALLOWED_ORIGINS_STR: str = ""
-    ALLOWED_ORIGINS: List[str] = ["http://localhost:5173", "http://localhost:8001", "https://blood-donation-frontend-seven.vercel.app/"]
+    ALLOWED_ORIGINS: List[str] = ["http://localhost:5173", "https://blood-donation-backend-buge.onrender.com", "https://blood-donation-frontend-seven.vercel.app/"]
 
     @field_validator("ALLOWED_ORIGINS", mode="before")
     @classmethod
