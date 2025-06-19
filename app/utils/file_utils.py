@@ -1,7 +1,7 @@
 import tempfile
 import shutil
 import os
-from core.config import settings
+from app.core.config import settings
 
 def save_uploaded_file(upload_file, suffix):
     """

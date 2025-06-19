@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from database.data import get_extraction_results_by_user_id, delete_extraction_results_by_user_id, delete_extraction_result_by_id
+from app.database.data import get_extraction_results_by_user_id, delete_extraction_results_by_user_id, delete_extraction_result_by_id
 
 router = APIRouter()
 

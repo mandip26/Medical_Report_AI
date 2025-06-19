@@ -1,11 +1,11 @@
-from services.gemini_service import GeminiService
+from app.services.gemini_service import GeminiService
 import os
 import re
 import json
 from fastapi import APIRouter, File, UploadFile, Depends, HTTPException
-from utils.file_utils import save_uploaded_file, remove_file
+from app.utils.file_utils import save_uploaded_file, remove_file
 import dotenv
-from database.data import save_extraction_result
+from app.database.data import save_extraction_result
 
 # Load environment variables from .env file 
 dotenv.load_dotenv()
