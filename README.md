@@ -41,43 +41,51 @@ A FastAPI backend service for extracting text from medical reports using the Gem
 ```bash
 uvicorn main:app --host 0.0.0.0 --port 5000 --reload false
 ```
+
 ```bash
 python app/main.py
 ```
 
-The API will be available at http://localhost:5000
+The API will be available at https://medical-report-ai.onrender.com
 
 API Documentation is available at:
 
-- Swagger UI: http://localhost:5000/docs
-- ReDoc: http://localhost:5000/redoc
+- Swagger UI: https://medical-report-ai.onrender.com/docs
+- ReDoc: https://medical-report-ai.onrender.com/redoc
 
 ## API Endpoints
 
 ### Health & Data Management
 
 #### GET /api/v1/health
+
 Health check endpoint for API monitoring.
 
 #### GET /api/v1/user/{user_id}
+
 Retrieve all extraction results for a specific user.
 
 #### DELETE /api/v1/user/{user_id}
+
 Delete all extraction results for a specific user.
 
 #### DELETE /api/v1/record/{document_id}
+
 Delete a specific extraction result by document ID.
 
 ### Data Extraction
 
 #### POST /api/v1/extract
+
 Extract information from a medical report file.
 
 **Parameters:**
+
 - `user_id` (optional): User identifier for storing results
 - `file`: Medical report file (PDF, JPG, PNG, TIFF)
 
 **Response:**
+
 ```json
 {
   "patient": {
