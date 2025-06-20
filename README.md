@@ -46,12 +46,10 @@ uvicorn main:app --host 0.0.0.0 --port 5000 --reload false
 python app/main.py
 ```
 
-The API will be available at https://medical-report-ai.onrender.com
+API Documentation at:
 
-API Documentation is available at:
-
-- Swagger UI: https://medical-report-ai.onrender.com/docs
-- ReDoc: https://medical-report-ai.onrender.com/redoc
+- Swagger UI: http://localhost:5000/docs
+- ReDoc: https://localhost:5000/redoc
 
 ## API Endpoints
 
